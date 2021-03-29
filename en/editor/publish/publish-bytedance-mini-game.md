@@ -1,6 +1,6 @@
 # Publish to ByteDance Mini Games
 
-> **Note**: some platforms only have Chinese documentation available when visiting the platforms website. It may be necessary to use Google Translate in-order to review the documentation.
+> **Note**: some platforms only have Chinese documentation available when visiting the platform's website. It may be necessary to use Google Translate in-order to review the documentation.
 
 **ByteDance Mini Games** are developed based on ByteDance full products, which do not require users to download. This is a brand-new game type that can be played on tap.
 
@@ -8,21 +8,21 @@ The game submission, review and release process of a mini-game needs to comply w
 
 ## Publish to ByteDance with Cocos Creator
 
-1. Download the **ByteDance DevTools** on [ByteDance Official Website](https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/developer-instrument/developer-instrument-update-and-download).
+1. Download the **ByteDance DevTools** on [ByteDance Official Website [cn]](https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/developer-instrument/developer-instrument-update-and-download).
 
-2. Log in to [Developer Platform](https://microapp.bytedance.com/)to find your `mini game appid`. For details, please refer to the official [Access Guide](https://microapp.bytedance.com/docs/zh-CN/mini-game/introduction/plugin-reference/set-up-mini-game) documentation.
+2. Log in to [Developer Platform [cn]](https://microapp.bytedance.com/)to find your `mini game appid`. For details, please refer to the official [Access Guide [cn]](https://microapp.bytedance.com/docs/zh-CN/mini-game/introduction/plugin-reference/set-up-mini-game) documentation.
 
-    ![](https://sf1-ttcdn-tos.pstatp.com/obj/website-img/f296a9f80eaeb40f4af38e8a4e25e17e_12.png)
+    ![appid](./publish-bytedance-mini-game/appid.png)
 
 3. Select the **ByteDance Mini Game** in the **Platform** in the **Build** panel, fill in the `mini game appid`, and then click **Build**
 
-    ![](./publish-bytedance-mini-game/build.jpg)
+    ![build](./publish-bytedance-mini-game/build.jpg)
 
 4. Preview game
 
     Following this process, a `bytedance-mini-game` folder will be generated in the project's **build** directory (the name of the folder is based on the **Build Task Name**), then you can open your game with the **ByteDance DevTools**.
 
-    ![](./publish-bytedance-mini-game/tool.jpg)
+    ![tool](./publish-bytedance-mini-game/tool.jpg)
 
 ## Build Options
 
@@ -55,12 +55,31 @@ Specifically, developers need to do the following:
 4. Delete the **res** folder inside the local release package.
 5. For the test phase, you may not be able to deploy to the official server, you need to use the local server to test, then open the details page in the WeChat DevTools, check the `Does not verify valid domain names, web-view (business domain names), TLS versions and HTTPS certificates` option in the **Local Settings**.
 
+## Subpackage Loading
+
+The ByteDance Mini Game requires a specific version to support the subpackage feature, and the version requirements for the ByteDance product are as follows:
+
+| Product | Android     | iOS        |
+| :--     | :---        | :---       |
+| TikTok  | v13.6.0     | v13.7.0    |
+| TouTiao | v7.9.9      | v7.9.8     |
+
+For ByteDance DevTools, please use **v2.0.6** or above, but below **v3.0.0**. After updating the DevTools, don't forget to modify the **Debug Base library** to **1.88.0** or above in the ByteDance DevTools.
+
+> **Note**: if the product version does not support subpackage loading, the engine will load the subpackage as a normal asset bundle.
+
+Currently, the size of the ByteDance Mini Game subpackage has following restrictions:
+- The size of all subpackages of the entire mini game cannot exceed **16 M**
+- The size of a single subpackage/main package cannot exceed **4 M**
+
+For details, please refer to the [ByteDance Subpackage Loading Official Documentation [zh]](https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/framework/subpackages/introduction)
+
 ## Reference documentation
 
 > **Note**: some platforms only have Chinese documentation available when visiting the platforms website. It may be necessary to use Google Translate in-order to review the documentation.
 
-- [ByteDance Mini Game Developer Document Guide](https://microapp.bytedance.com/docs/zh-CN/mini-game/introduction/about-mini-game/flow-entrance/brief-introduction-on-flow-entrance)
-- [ByteDance Developer Platform](https://microapp.bytedance.com/)
-- [ByteDance Mini Game API Documentation](https://developer.toutiao.com/docs/game/)
-- [ByteDance DevTools Download](https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/developer-instrument/developer-instrument-update-and-download)
-- [ByteDance DevTools Documentation](https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/developer-instrument/development-assistance/mini-app-developer-instrument)
+- [ByteDance Mini Game Developer Document Guide [cn]](https://microapp.bytedance.com/docs/zh-CN/mini-game/introduction/about-mini-game/flow-entrance/brief-introduction-on-flow-entrance)
+- [ByteDance Developer Platform [cn]](https://microapp.bytedance.com/)
+- [ByteDance Mini Game API Documentation [cn]](https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/api/mini-game/bytedance-mini-game/)
+- [ByteDance DevTools Download [cn]](https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/developer-instrument/developer-instrument-update-and-download)
+- [ByteDance DevTools Documentation [cn]](https://microapp.bytedance.com/docs/zh-CN/mini-game/develop/developer-instrument/development-assistance/mini-app-developer-instrument)

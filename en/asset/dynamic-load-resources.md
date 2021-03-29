@@ -27,7 +27,7 @@ resources.load("test assets/anim", AnimationClip, (err, clip) => {
 
 - The second to note is that compared to previous Cocos2d-JS, dynamic loading of resources in Creator is **asynchronous**, you need to get the loaded resources in the callback function. This is done because in addition to the resources associated with the scene, Creator has no additional resources preload list, and the dynamically loaded resources are really dynamically loaded.
 
-  **Note**: As of v2.4, the `loader` interface is deprecated, please use `assetManager` instead. You can refer to the [Asset Manager Upgrade Guide](asset-manager-upgrade-guide.md) documentation for details.
+  > **Note**: as of v2.4, the `loader` interface is deprecated, please use `assetManager` instead. You can refer to the [Asset Manager Upgrade Guide](asset-manager-upgrade-guide.md) documentation for details.
 
 ### Loading a SpriteFrame or a Texture2D
 
@@ -65,11 +65,36 @@ resources.load("test assets/sheep", SpriteAtlas, (err, atlas) => {
 });
 ```
 
+### Load resources in the FBX or glTF model
+
+After importing the FBX model or glTF model into the editor, it will parse out the related resources which includes meshes, materials, skeletons, animations, etc. contained in the model, as shown in the following figure.
+
+![model](./load-assets/model.png)
+
+It is possible to dynamically load a single resource in the model at runtime by simply specifying the path to a specific sub-resource, as follows.
+
+```typescript
+// Load the mesh in the model
+resources.load("Monster/monster", Mesh, (err, mesh) => {
+    this.node.getComponent(MeshRenderer).mesh = mesh;
+});
+
+// Load the material in the model
+resources.load("Monster/monster-effect", Material, (err, material) => {
+    this.node.getComponent(MeshRenderer).material = material;
+});
+
+// Load the skeleton in the model
+resources.load("Monster/Armature", Skeleton, (err, skeleton) => {
+    this.node.getComponent(SkinnedMeshRenderer).skeleton = skeleton;
+});
+```
+
 ### Resource bulk loading
 
 `resources.loadDir` can load multiple resources under the same path:
 
-```javascript
+```ts
 // loading all resource in the test assets directory
 resources.loadDir("test assets", function (err, assets) {
     // ...
@@ -85,7 +110,7 @@ resources.loadDir("test assets", SpriteFrame, function (err, assets) {
 
 Starting with v2.4, in addition to scenes that can be preloaded, other resources can also be preloaded. Preloading has the same loading parameters as normal loading, but it will only download the necessary resources, and will not perform deserialization or initialization. Therefore, it consumes less performance and is suitable for use during the game.
 
-`resources` provides `preload` and `preloadDir` for preloading resources.  
+`resources` provides `preload` and `preloadDir` for preloading resources.
 
 ```typescript
 resources.preload('test assets/image', SpriteFrame);
@@ -95,13 +120,13 @@ resources.load('test assets/image', SpriteFrame, (err, spriteFrame) => {
 });
 ```
 
-You can use the preload related interface to load resources in advance, without waiting for the preload to finish, you can use the normal load interface to load, the normal load interface will directly reuse the content that has been downloaded during the preload process to shorten the load time.
+Use the preload related interface to load resources in advance, without waiting for the preload to finish. Then use the normal load interface to load, the normal load interface will directly reuse the content that has been downloaded during the preload process to shorten the load time.
 
 For more information on preloading, please refer to the [Preloading and Loading](preload-load.md) documentation.
 
 ## How to load remote assets or files in device
 
-Currently in Cocos Creator, we support loading the remote image files, which is very useful to load user picture from social network websites. To load files from such urls, you should call `assetManager.loadRemote`. At the same time you can use the same API to load resources on the local device storage. The `resources.load` APIs mentioned above only apply to the application package resources and hot update resources. Here is how to load remote assets and local
+Currently in Cocos Creator, we support loading the remote image files, which is very useful to load user picture from social network websites. To load files from such urls, you should call `assetManager.loadRemote`. At the same time the same API can be used to load resources on the local device storage. The `resources.load` APIs mentioned above only apply to the application package resources and hot update resources. Here is how to load remote assets and local
 device files:
 
 ```typescript
@@ -138,5 +163,5 @@ assetManager.loadRemote(remoteUrl, function (err, textAsset) {
 
 There still remains some restrictions currently, the most important are:
 
-1. This loading method supports only native resource types such as textures, audios, text, etc., and does not support direct loading and analysis of resources such as SpriteFrame, SpriteAtlas, Tilemap. (If you want to load all resources remotely, you can use the [Asset Bundle](bundle.md))
+1. This loading method supports only native resource types such as textures, audios, text, etc., and does not support direct loading and analysis of resources such as SpriteFrame, SpriteAtlas, Tilemap. (If you want to load all resources remotely, use the [Asset Bundle](bundle.md))
 2. Remote loading ability on Web is limited by the browser's [CORS cross-domain policy restriction](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS). If the server forbid cross-domain access, loading request will fail, and due to WebGL security policy restrictions, even if the server allows CORS http request, textures loaded can not be rendered.

@@ -6,14 +6,14 @@ ProgressBar（进度条）经常被用于在游戏中显示某个操作的进度
 
 点击 **属性检查器** 下面的 **添加组件** 按钮，然后选择 **UI/ProgressBar** 即可添加 ProgressBar 组件到节点上。
 
-进度条的脚本接口请参考[ProgressBar API](https://docs.cocos.com/creator/3.0/api/zh/classes/ui.progressbar.html)。
+进度条的脚本接口请参考[ProgressBar API](__APIDOC__/zh/classes/ui.progressbar.html)。
 
 关于使用可以参考 test-cases-3d 里的 [progress](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/11.progress) 相关。
 
 ## ProgressBar 属性
 
 | 属性 |   功能说明
-| -------------- | ----------- |
+| :-------------- | :----------- |
 | Bar Sprite | 进度条渲染所需要的 Sprite 组件，可以通过拖拽一个带有 **Sprite** 组件的节点到该属性上来建立关联。
 | Mode | 支持 **HORIZONTAL**（水平）、**VERTICAL**（垂直）和 **FILLED**（填充）三种模式，可以通过配合 **reverse** 属性来改变起始方向。
 | Total Length | 当进度条为 100% 时 Bar Sprite 的总长度/总宽度。在 **FILLED** 模式下 **Total Length** 表示取 Bar Sprite 总显示范围的百分比，取值范围从 0 ~ 1。

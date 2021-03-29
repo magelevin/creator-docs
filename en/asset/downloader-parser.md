@@ -53,7 +53,7 @@ You can set limits such as the maximum number of concurrent downloads in the dow
   assetManager.downloader.maxRequestsPerFrame = 6;
   ```
 
-In addition, `downloader` uses an instance of the `jsb.Downloader` class to download resources from the server on **native platforms**. `jsb.Downloader` is similar to the Web's [XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest). Currently the `jsb.Downloader` class instances have a default download concurrency limit of **32** and a default timeout of **30s**, if you want to change the default values, you can do so in `main.js`.
+In addition, `downloader` uses an instance of the `jsb.Downloader` class to download resources from the server on **native platforms**. `jsb.Downloader` is similar to the Web's [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest). Currently the `jsb.Downloader` class instances have a default download concurrency limit of **32** and a default timeout of **30s**, if you want to change the default values, you can do so in `main.js`.
 
 ```typescript
 // main.js
@@ -134,7 +134,7 @@ assetManager.presets.mypreset = {maxConcurrency: 10, maxRequestsPerFrame: 6};
 assetManager.loadAny({'path': 'test'}, {preset: 'mypreset'}, callback);
 ```
 
-**Note**: Parameters related to the download and parsing process (e.g. number of download concurrent, number of download retries, etc.) can be set via optional parameters, presets, and the downloader/parser itself. When the same parameter is set in multiple ways, the engine selects to use it in the order of selectable **optional parameter > preset > downloader/parser**. That is, if the engine can't find the relevant settings in the optional parameter, it will look in the preset, and if it can't find them in the preset, it will look in the downloader/parser.
+> **Note**: parameters related to the download and parsing process (e.g. number of download concurrent, number of download retries, etc.) can be set via optional parameters, presets, and the downloader/parser itself. When the same parameter is set in multiple ways, the engine selects to use it in the order of selectable **optional parameter > preset > downloader/parser**. That is, if the engine can't find the relevant settings in the optional parameter, it will look in the preset, and if it can't find them in the preset, it will look in the downloader/parser.
 
 ## Custom handlers
 
@@ -163,4 +163,4 @@ After registered the handler, the corresponding handler will be used if the down
 assetManager.loadAny({'url': 'http://example.com/myAsset.myformat'}, callback);
 ```
 
-Note that the handler can receive incoming optional parameters, which you can use to implement custom extensions, see the [Optional Parameters](options.md#expand-engine) documentation for details.
+Note that the handler can receive incoming optional parameters, which can be used to implement custom extensions, see the [Optional Parameters](options.md#expand-engine) documentation for details.

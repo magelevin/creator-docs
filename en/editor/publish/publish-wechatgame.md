@@ -1,6 +1,6 @@
 # Publish to WeChat Mini Games
 
-> **Note**: some platforms only have Chinese documentation available when visiting the platforms website. It may be necessary to use Google Translate in-order to review the documentation.
+> **Note**: some platforms only have Chinese documentation available when visiting the platform's website. It may be necessary to use Google Translate in-order to review the documentation.
 
 The runtime environment of the **WeChat Mini Game** is an extension of the **WeChat Mini Program**, providing a WebGL interface encapsulation based on the mini program environment, greatly improving rendering capabilities and performance. However, since these interfaces are encapsulated by the WeChat team, they are not equivalent to the browser environment.
 
@@ -18,19 +18,19 @@ In addition, the game submission, review and release process of the **WeChat Min
 
 2. Set the **WeChatGame App Path** in **Cocos Creator -> Preferences -> [Native Develop](../../editor/preferences/index.md)**.
 
-    ![](./publish-wechatgame/preference.png)
+    ![preference](./publish-wechatgame/preference.png)
 
 3. Log in to the WeChat public platform and find the appid
 
-    ![](./publish-wechatgame/appid.jpeg)
+    ![appid](./publish-wechatgame/appid.jpeg)
 
 4. Select the **WeChat Game** in the **Platform** of the **Build** panel, fill in the `mini game appid`, and then click **Build**
 
-    ![](./publish-wechatgame/build.png)
+    ![build](./publish-wechatgame/build.png)
 
 5. Click **Play** to open the **WeChat DevTools**
 
-    ![](./publish-wechatgame/tool.jpeg)
+    ![tool](./publish-wechatgame/tool.jpeg)
 
     > **Note**: the **WeChat DevTools**, if it has not been run on a Mac before, will show an error that states: `Please ensure that the IDE has been properly installed`. You need to manually open the **WeChat DevTools** once, before you can click **Run**.
 
@@ -38,19 +38,19 @@ In addition, the game submission, review and release process of the **WeChat Min
 
     Following this process, a `wechatgame` folder will be generated in the project's **build** directory (the name of the folder is based on the **Build Task Name**), which already contains the configuration files `game.json` and `project.config.json` of the WeChat Mini Games environment.
 
-    ![](./publish-wechatgame/package.jpg)
+    ![package](./publish-wechatgame/package.jpg)
 
 ### Build Options
 
 | Options | Optional or not | Default | Explanation |
-| - | - | - | - |
+| :-- | :-- | :-- | :-- |
 | **appid** | Required | `wx6ac3f5090a6b99c5` | The appid of the WeChat Mini Games, it will be written to `project.config.json` file.|
 | **Start Scene Asset Bundle** | Optional | false | If set, the start scene and its related dependent resources are built into the built-in Asset Bundle — [start-scene](../../asset/bundle.md#the-built-in-asset-bundle) to speed up the resource loading of the start scene.|
 | **Remote server address** | Optional | Empty | The remote server address. assets will then be obtained from this address.|
 | **Open data context root** | Optional | Empty | If an Open Data Context exists, use this root to specify the relative path of the Open Data Context folder in the build directory so that the directory is not overwritten or modified during the build.|
 | **Orientation** | Required | `landscape` | Device orientation, it will be written to `game.json` file.|
 
-## asset Management for WeChat Mini Game Environment
+## Asset Management for WeChat Mini Game Environment
 
 In a **WeChat Mini Game** environment, asset management is the most special part. It differs from the browser in the following four points:
 
@@ -85,13 +85,13 @@ Specifically, developers need to do:
 4. Delete the **res** folder inside the local release package.
 5. For the test phase, you may not be able to deploy to the official server, you need to use the local server to test, then open the details page in the WeChat DevTools, check the `Does not verify valid domain names, web-view (business domain names), TLS versions and HTTPS certificates` option in the **Local Settings**.
 
-    ![](./publish-wechatgame/detail.jpeg)
+    ![detail](./publish-wechatgame/detail.jpeg)
 
-> **Note**: if the cache asset exceeds the WeChat environment limit, you need to manually clear the asset. And you can use `wx.downloader.cleanAllAssets()` and `wx.downloader.cleanOldAssets()` to clear the cache in **WeChat Mini Games**. The former clears all the cache assets in the cache directory, please use it carefully. While the latter clears cache assets that are currently unused in the cache directory in the application.
+> **Note**: if the cache asset exceeds the WeChat environment limit, you need to manually clear the asset. Use `wx.downloader.cleanAllAssets()` and `wx.downloader.cleanOldAssets()` to clear the cache in **WeChat Mini Games**. The former clears all the cache assets in the cache directory, please use it carefully. While the latter clears cache assets that are currently unused in the cache directory in the application.
 
 ## WeChat Mini Game Subpackage Loading
 
-To achieve subpackage loading with **WeChat Mini Game**, please refer to [Asset Bundle](../../asset/bundle.md) documentation.
+To achieve subpackage loading with **WeChat Mini Game**, please refer to [Mini Game Subpackage](subpackage.md) documentation.
 
 ## Platform SDK Access
 
@@ -113,9 +113,58 @@ __Cocos Creator__'s adaptation of **WeChat Mini Games** has not been completely 
 
 It is possible to use the missing functionality by calling the **WeChat's** API directly.
 
-## Reference documentation
+## WebAssembly Support
 
-> **Note**: some platforms only have Chinese documentation available when visiting the platforms website. It may be necessary to use Google Translate in-order to review the documentation.
+As of 3.0, the __Wasm physics experimental__ option has been added to the WeChat Mini Game builds. It is a laboratory feature for choosing the usage mode of __ammo__ physics:
+
+- __js__: Use __js__ mode, this is consistent with previous versions.
+- __fallback__: Automatic __fallback__ mode, use __wasm__ in an environment that supports __wasm__, or revert to __js__.
+- __wasm__: Use __wasm__ mode.
+
+In __fallback__, the editor packs all the mode code for the __ammo__ physics. The corresponding code packets for the two modes are __1.2MB__ and __0.7MB__, totaling nearly __2MB__, which has a significant impact on the __4MB__ limit of the main packet.
+
+The solution is to reduce the pressure on the main package by configuring the subpackage, taking the `ammo-82499473.js` file as an example of a subpackage:
+
+- Modify `game.json`
+
+    ```ts
+    {
+        //*,
+        "subpackages": [{
+            "name": "ammo",
+            "root": "cocos-js/ammo-82499473.js"
+        }]
+    }
+    ```
+
+- Modify the `init` function in `game.js`
+
+    ```ts
+    window.__globalAdapter.init(function() {
+        fsUtils.loadSubpackage('ammo', null, (err) => {
+            System.import('./cocos-js/ammo-82499473.js').then(() => {
+                return System.import('./application.js').then(({ createApplication }) => {
+                    return createApplication({
+                        loadJsListFile: (url) => require(url),
+                        loadAmmoJsWasmBinary,
+                    });
+                }).then((application) => {
+                    return onApplicationCreated(application);
+                }).catch((err) => {
+                    console.error(err);
+                });
+            })
+        });
+    });
+    ```
+
+> **Notes**:
+> 1. The WeChat Separation Engine plugin currently only supports __js__ mode.
+> 2. WebAssembly required WeChat v7.0.17 and above.
+> 3. The WeChat WebAssembly debugging base library needs to be v2.12.0 and above.
+> 4. __Fallback__ mode is recommended for the most comprehensive device support.
+
+## Reference documentation
 
 - [WeChat Mini Game Developer Document](https://developers.weixin.qq.com/minigame/en/dev/guide/)
 - [WeChat Public Platform](https://mp.weixin.qq.com/?lang=en_US)

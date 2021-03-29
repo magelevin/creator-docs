@@ -4,12 +4,12 @@
 
 点击 **属性检查器** 下面的 **添加组件** 按钮，然后选择 **UI/UITransform** 即可添加 UITransform 组件到节点上。
 
-UITransform 脚本接口请参考 [Mask API](https://docs.cocos.com/creator/3.0/api/zh/classes/ui.uitransform.html)。
+UITransform 脚本接口请参考 [Mask API](__APIDOC__/zh/classes/ui.uitransform.html)。
 
 ## UITransform 属性介绍
 
 | 属性 |   功能说明
-| -------------- | ----------- |
+| :-------------- | :----------- |
 | ContentSize | UI 矩形内容尺寸
 | AnchorPoint | UI 矩形锚点位置
 | Priority | UI 节点优先级，在当前父节点下排序，Canvas 节点顺序不受此属性影响。

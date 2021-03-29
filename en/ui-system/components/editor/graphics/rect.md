@@ -3,24 +3,24 @@
 The `rect()` method is used to create a rectangle.
 
 | Parameter | Description |
-| -------------- | ----------- |
-| *x* | The x coordinate of the lower left point of the rectangle. |
-| *y* | The y coordinate of the lower left point of the rectangle. |
-| *width* | The width of rectangle. |
-| *height* | The height of rectangle. |
+| :-------------- | :----------- |
+| **x** | The x coordinate of the lower left point of the rectangle. |
+| **y** | The y coordinate of the lower left point of the rectangle. |
+| **width** | The width of rectangle. |
+| **height** | The height of rectangle. |
 
 ## Example
 
-```javascript
-var ctx = node.getComponent(Graphics);
+```ts
+const ctx = node.getComponent(Graphics);
 ctx.rect(20,20,150,100);
 ctx.stroke();
 ```
 
 <a href="rect.png"><img src="rect.png"></a>
 
-```javascript
-var ctx = node.getComponent(Graphics);
+```ts
+const ctx = node.getComponent(Graphics);
 
 // Red rectangle
 ctx.lineWidth = 6;

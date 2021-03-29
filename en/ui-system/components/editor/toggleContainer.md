@@ -8,14 +8,14 @@ ToggleContainer is not a visible UI component but it can be used to modify the b
 
 Click the __Add Component__ button at the bottom of the __Inspector__ panel and select __UI/ToggleContainer__ to add the ToggleContainer component to the node.
 
-To use `ToggleContainer`, please refer to the [ToggleContainer API](https://docs.cocos.com/creator/3.0/api/en/classes/ui.togglecontainer.html) documentation and the [toggleContainer](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/09.toggle) scene of the test-cases-3d project.
+To use `ToggleContainer`, please refer to the [ToggleContainer API](__APIDOC__/en/classes/ui.togglecontainer.html) documentation and the [toggleContainer](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/09.toggle) scene of the test-cases-3d project.
 
 ## ToggleContainer Properties
 
-| Properties |   Functions Explanation |
-| -------------- | ----------- |
-| AllowSwitchOff | If it is enabled, then the toggle button can be checked and unchecked repeatedly when it is clicked. If it is disabled, it will make sure there is always only one toggle could be checked and the already checked toggle can't be unchecked |
-| CheckEvents | List type, default is null. Each event added by the user is composed of the node reference, component name and a response function. Please see the __ToggleContainer Event__ section below for details |
+| Property |   Functions Explanation |
+| :-------------- | :----------- |
+| **AllowSwitchOff** | If it is enabled, then the toggle button can be checked and unchecked repeatedly when it is clicked. If it is disabled, it will make sure there is always only one toggle could be checked and the already checked toggle can't be unchecked |
+| **CheckEvents** | List type, default is null. Each event added by the user is composed of the node reference, component name and a response function. Please see the __ToggleContainer Event__ section below for details |
 
 ## ToggleContainer Event
 

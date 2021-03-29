@@ -27,21 +27,23 @@
 一些通用的构建通用参数介绍，请参考 [通用构建参数介绍](build-options.md)。
 
 | 选项名 | 可选 | 默认值 | 说明 | 字段名 |
-| - | - | - | - | - |
-| 初始场景分包 | - | false | 勾选后，首场景及其相关的依赖资源会被构建到发布包目录 assets 下的内置 Asset Bundle — [start-scene](../../asset/bundle.md#内置-Asset-Bundle) 中，提高初始场景的资源加载速度。 | startSceneAssetBundle
+| :-- | :-- | :-- | :-- | :-- |
+| 初始场景分包 | - | false | 勾选后，首场景及其相关的依赖资源会被构建到发布包目录 assets 下的内置 Asset Bundle — [start-scene](../../asset/bundle.md#%E5%86%85%E7%BD%AE-asset-bundle) 中，提高初始场景的资源加载速度。 | startSceneAssetBundle
 | 设备方向 | 必填 | landscape | 设备方向，填写后将会写入在 `game.json` 内。| orientation |
 | appid | 必填 | 'testappid' | 百度小游戏 appid，填写后将会写入在 `project.swan.json` 内。| appid |
 | 远程服务器地址 | - | - | 远程服务器地址，开发者需要在构建后手动将发布包目录下的 remote 文件夹上传到所填写的资源服务器地址上。 | remoteServerAddress |
-| 生成开放数据与工程模板 | - | false | 用于接入开放数据域，详情可以参考[开放数据域](./build-open-data-context.md) | buildOpenDataContextTemplate |
+| 生成开放数据域工程模板 | - | false | 用于接入开放数据域，详情可以参考 [开放数据域](./build-open-data-context.md) | buildOpenDataContextTemplate |
 
 ### 发布流程
 
 1. 在 **构建发布** 面板中选择 **发布平台** 为 **百度小游戏**，填入 **appid**，然后点击 **构建**。
 
     ![](./publish-baidugame/build.png)
+
 2. 构建完成后，会在发布包的目录下生成一个 **baidugame** 的百度小游戏工程文件夹，其中已经包含了百度小游戏环境的配置文件：`game.json` 和 `project.swan.json`
 
     ![](./publish-baidugame/package.png)
+
 3. 使用 **百度开发者工具** 打开构建生成的 **baidugame** 文件夹，即可打开百度小游戏项目及预览调试游戏内容。**百度开发者工具** 的使用方式请参考 [百度开发者工具文档](https://smartprogram.baidu.com/docs/game/tutorials/howto/dev/)。
 
     ![](./publish-baidugame/preview.png)
@@ -69,6 +71,8 @@
 - 所有包的总大小不超过 **8MB**
 - 单个分包/主包大小不超过 **4MB**
 
+具体的分包加载机制请参考 [小游戏分包](subpackage.md)。
+
 ## 平台 SDK 接入
 
 除了纯游戏内容以外，百度小游戏环境还提供了非常强大的原生 SDK 接口，这些接口都是仅存在于百度小游戏环境中的，等同于其他平台的第三方 SDK 接口。这类 SDK 接口的移植工作在现阶段还是需要开发者自己处理。下面列举一些百度小游戏所提供的强大 SDK 能力：
@@ -91,3 +95,4 @@
 - [百度小游戏注册指导文档](https://smartprogram.baidu.com/docs/game/)
 - [百度开发者工具文档](https://smartprogram.baidu.com/docs/game/tutorials/howto/dev/)
 - [百度小游戏 API 文档](https://smartprogram.baidu.com/docs/game/api/openApi/authorize/)
+- [百度小游戏分包加载](https://smartprogram.baidu.com/docs/game/tutorials/subpackages/sub/)

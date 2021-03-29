@@ -62,7 +62,7 @@ __Right-click__ on the __timeline position__ or __click__ the __timeline button_
 
 The __index node__ in the __animation data__ is based on the relative path of the node where the __Animation component__ is attached. Therefore, a node with the same name under the same parent node can only generate one copy of __animation data__, and can only be applied to the first node with the same name.
 
-The nodes here and the nodes of the __Hierarchy__ panel are mapped one by one. Using this relationship, when the number of nodes in the node list is too large to be consulted, you can use the search function of the __Hierarchy__ panel to locate the nodes. Click on the node in the __Hierarchy__ panel, and it will also jump to the corresponding node position in the __Animation Editor__ to achieve a reasonable display effect.
+The nodes here and the nodes of the __Hierarchy__ panel are mapped one by one. Using this relationship, when the number of nodes in the node list is too large to be consulted, use the search function of the __Hierarchy__ panel to locate the nodes. Click on the node in the __Hierarchy__ panel, and it will also jump to the corresponding node position in the __Animation Editor__ to achieve a reasonable display effect.
 
 #### Selected node icon
 
@@ -90,7 +90,7 @@ It mainly displays the specific key frame settings on each property track, and i
 
 __Click__ the clip option in the lower left corner of the __Animation Editor__ and select the clip to be edited:
 
-![](./animation-editor/switch-clip.jpg)
+![switch-clip](./animation-editor/switch-clip.jpg)
 
 ### Change the keyframe display area
 
@@ -106,13 +106,13 @@ If you want to see the key frame on the right side of the __Animation Editor__ t
 
 - __Press__ the __middle/right__ mouse button and drag in the areas b, d and f in the figure.
 
-    ![](./animation-editor/scale-canvas.gif)
+    ![scale-canvas](./animation-editor/scale-canvas.gif)
 
 #### c. Drag to change the layout of the animation editor
 
 The dividing line between the node list and the time, and the dividing line between the __Property List__ and the time axis can be used to drag and change the layout, and can be freely adjusted to the layout effect suitable for editing by dragging.
 
-  ![](./animation-editor/layout.gif)
+  ![layout](./animation-editor/layout.gif)
 
 ### Change the currently selected time
 

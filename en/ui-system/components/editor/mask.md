@@ -8,16 +8,16 @@ Select a node in the __Hierarchy__ panel, then click the __Add Component__ butto
 
 > __Note__: the Mask component cannot be added to a node with other renderer components such as __Sprite__, __Label__, etc.
 
-To use `Mask`, please refer to the [Mask API](https://docs.cocos.com/creator/3.0/api/en/classes/ui.mask-1.html) documentation and the [mask](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/08.mask) scene of the test-cases-3d project.
+To use `Mask`, please refer to the [Mask API](__APIDOC__/en/classes/ui.mask-1.html) documentation and the [mask](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/08.mask) scene of the test-cases-3d project.
 
 ## Mask Properties
 
-| Properties | Function Explanation |
-| -------------- | ----------- |
-| *Type*           | Mask type, including `RECT`, `ELLIPSE`, `GRAPHICS_STENCIL`, `IMAGE_STENCIL`. |
-| *Segments*       | The segments for ellipse mask, which takes effect only when the Mask type is set to `ELLIPSE`.   |
-| *Inverted*       | The Reverse mask. |
-| *SpriteFrame*       | Image used for the type is **IMAGE_STENCIL**
+| Property | Function Explanation |
+| :-------------- | :----------- |
+| **Type**           | Mask type, including `RECT`, `ELLIPSE`, `GRAPHICS_STENCIL`, `IMAGE_STENCIL`. |
+| **Segments**       | The segments for ellipse mask, which takes effect only when the Mask type is set to `ELLIPSE`.   |
+| **Inverted**       | The Reverse mask. |
+| **SpriteFrame**       | Image used for the type is **IMAGE_STENCIL**
 
 ### Type
 
@@ -71,7 +71,7 @@ It can also be set by code at runtime. Example:
     mask.alphaThreshold = 0.1;
 ```
 
-> __Note__:
+> __Notes__:
 > 1. After adding the __Mask__ component to a node, all nodes in the sub tree of this node will be affected by __Mask__ during rendering.
 > 2. The `GRAPHICS_STENCIL` simply provides the __graphics__ component, which developers can use graphics property in the __mask__ component to draw custom graphics. But the node click events are still calculated based on the size of the node.
 > 3. The `IMAGE_STENCIL` type requires a picture resource by default. If it is not set, it is equivalent to no mask.

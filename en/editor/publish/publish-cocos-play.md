@@ -1,6 +1,6 @@
 # Publish to Cocos Play
 
-> **Note**: some platforms only have Chinese documentation available when visiting the platforms website. It may be necessary to use Google Translate in-order to review the documentation.
+> **Note**: some platforms only have Chinese documentation available when visiting the platform's website. It may be necessary to use Google Translate in-order to review the documentation.
 
 **Cocos Creator** officially supports the release of games to the **Cocos Play**.
 
@@ -14,13 +14,13 @@
 
 1. Use **Cocos Creator 3.0** to open a project. Select **Cocos Play** in the **Platform** dropdown of the **Build** panel, and then click **Build**.
 
-    ![](publish-cocos-play/build.png)
+    ![build](publish-cocos-play/build.png)
 
 The specific filling rules for the relevant parameter configuration are as follows:
 
   - **tinyPacketMode**
 
-    This item is optional. The in-package volume of the game contains code and assets that cannot exceed 10M, and assets can be loaded via network requests. **tinyPacketMode** is to help developers keep the script files in the game package, other assets are uploaded to the remote server, and downloaded from the remote server as needed. And the download, cache and version management of remote assets, **Cocos Creator** has already helped the developer. What the developer needs to do is the following steps:
+    This item is optional. The in-package volume of the game contains code and assets that cannot exceed 10M, and assets can be loaded via network requests. **tinyPacketMode** is to help developers keep the script files in the game package, other assets are uploaded to the remote server, and downloaded from the remote server as needed. Cocos Creator has already helped the developer with the download, cache, and version management of remote assets. The developer needs to do is the following steps:
 
     - When building, check the **tinyPacketMode** and fill in the **tinyPacketModeServer**.
 
@@ -44,7 +44,7 @@ The specific filling rules for the relevant parameter configuration are as follo
 
 2. After the build is completed, click the **folder icon** button below the cocos-play build task to open the `build` release path. If the **Build Task Name** is `cocos-play`, you can see that a `cocos-play` folder is generated in the `build` directory. This folder is the exported **Cocos Play** game project and **cpk**, the **cpk** package is in the `build/cocos-play` directory.
 
-    ![](publish-cocos-play/package.png)
+    ![package](publish-cocos-play/package.png)
 
 ### Access testing
 
@@ -56,7 +56,7 @@ For details, please refer to the [Self-test Tools](https://gamebox.gitbook.io/pr
 
 Open the previously installed **Self-test Tools**, then click the **Configure Game** button at the top left of the **Self-test Tools** to enter the game configuration page. Configure parameters as required and click **Save**.
 
-![](publish-cocos-play/configuration.png)
+![configuration](publish-cocos-play/configuration.png)
 
 #### Parameters
 

@@ -2,7 +2,7 @@
 
 After obtaining a __Node__ or __Component__ instance through the method introduced in the [Access Node and Component](access-node-component.md) documentation, there are common interfaces that can be used to achieve the various effects needed through the node and component instance and it's operation. 
 
-Please review the [Node](../../../api/en/classes/Node.html) and the [Component](../../../api/en/classes/Component.html) API documentation.
+Please review the [Node](__APIDOC__/en/classes/scene_graph.node-1.html) and the [Component](__APIDOC__/en/classes/component.component-1.html) API documentation.
 
 ## Node Status and Level Operations
 
@@ -61,8 +61,8 @@ parentNode.addChild(this.node);
 
 These two methods are equivalent.
 
-> **Note**:<br>
-> 1. The `removeFromParent` usually needs to pass a `false`, otherwise it will empty the bound events and actions etc. on the node by default.
+> **Notes**:
+> 1. The `removeFromParent` usually needs to pass a `false`, otherwise it will empty the bound events and actions, etc. on the node by default.
 > 2. After creating a new node through the method introduced in the [Create and Destroy Node](create-destroy.md) documentation, it is a **must** to set a parent node for the node to correctly initialize the node.
 
 ### Child Nodes of the Parent Node

@@ -6,16 +6,16 @@ The ScrollBar allows the user to scroll by dragging a sliding block. It's a bit 
 
 Click the __Add Component__ button at the bottom of the __Inspector__ panel and select __UI/ScrollBar__ to add the ScrollBar component to the node.
 
-Please refer to the [ScrollBar API](https://docs.cocos.com/creator/3.0/api/en/classes/ui.scrollbar.html).
+Please refer to the [ScrollBar API](__APIDOC__/en/classes/ui.scrollbar.html).
 
 ## ScrollBar Properties
 
-| Properties | Function Explanation |
-| -------------- | ----------- |
-| AutoHideTime | Time to hide the __ScrollBar__ automatically, need to set `Enable Auto Hide` to true for it to take effect |
-| Direction | Scroll direction, including __HORIZONTAL__ and __VERTICAL__
-| EnableAutoHide | Enable or disable auto hide. If this property is enabled, the __ScrollBar__ will automatically disappear after actions stopped for __AutoHideTime__. |
-| Handle | ScrollBar foreground picture. Its length / width will be calculated according to the content size of ScrollView and the dimensions of the actual display area |
+| Property | Function Explanation |
+| :-------------- | :----------- |
+| **AutoHideTime** | Time to hide the __ScrollBar__ automatically, need to set `Enable Auto Hide` to true for it to take effect |
+| **Direction** | Scroll direction, including __HORIZONTAL__ and __VERTICAL__
+| **EnableAutoHide** | Enable or disable auto hide. If this property is enabled, the __ScrollBar__ will automatically disappear after actions stopped for __AutoHideTime__. |
+| **Handle** | ScrollBar foreground picture. The length/width will be calculated according to the content size of ScrollView and the dimensions of the actual display area |
 
 ## Detailed Explanation
 

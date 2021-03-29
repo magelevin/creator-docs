@@ -1,8 +1,10 @@
 # RigidBody Component
 
-**RigidBody** is the basic object that make up the physical world, and it can make a node physically affected and react. The RigidBody component is invalid when using the **Builtin** physics engine.
+**RigidBody** is the basic object that make up a physics world, and it can make a node physically affected and react.
 
-![](img/rigidbody-prop.png)
+The **RigidBody** component is used to control the properties associated with the simulation.
+
+![rigidbody-prop](img/rigidbody-prop.png)
 
 Click the **Add Component -> Physics Component -> RigidBody** button at the bottom of the **Inspector** panel to add the RigidBody component to the node.
 
@@ -10,16 +12,16 @@ Click the **Add Component -> Physics Component -> RigidBody** button at the bott
 
 | Properties      | Function explanation |
 | :-------------- | :------------------- |
-| Type            | The type of the rigid body, including **DYNAMIC**, **STATIC** and **KINEMATIC**, See below for details.
-| Mass            | The mass of the rigid body.                     |
-| AllowSleep      | Whether to allow the rigid body to enter sleep state.   |
-| Linear Damping  | Used to reduce the linear rate of rigid body. The larger the value, the slower the rigid body moves. |
-| Angular Damping | Used to reduce the rotation rate of rigid body. The larger the value, the slower the rigid body rotates. |
-| Use Gravity     | If enabled, the rigid body is affected by gravity.     |
-| Linear Factor   | It can affect the linear velocity change of the rigid body in each axis. The larger the value, the faster the rigid body moves. |
-| Angular Factor  | It can affect the rotation speed change of the rigid body in each axis. The larger the value, the faster the rigid body rotates. |
+| **Type**            | The type of the rigid body, including **DYNAMIC**, **STATIC** and **KINEMATIC**, See below for details.
+| **Mass**            | The mass of the rigid body.                     |
+| **AllowSleep**      | Whether to allow the rigid body to enter sleep state.   |
+| **Linear Damping**  | Used to reduce the linear rate of rigid body. The larger the value, the slower the rigid body moves. |
+| **Angular Damping** | Used to reduce the rotation rate of rigid body. The larger the value, the slower the rigid body rotates. |
+| **Use Gravity**     | If enabled, the rigid body is affected by gravity.     |
+| **Linear Factor**   | It can affect the linear velocity change of the rigid body in each axis. The larger the value, the faster the rigid body moves. |
+| **Angular Factor**  | It can affect the rotation speed change of the rigid body in each axis. The larger the value, the faster the rigid body rotates. |
 
-For the API interface of RigidBody, please refer to [Class RigidBody](https://docs.cocos.com/creator/3.0/api/en/classes/physics.rigidbody.html).
+For more information, please refer to the [RigidBody API](__APIDOC__/en/classes/physics.rigidbody.html).
 
 ### Obtaining a RigidBody
 
@@ -158,6 +160,6 @@ The RigidBody component provides the `linearFactor` and `angularFactor` properti
 
 The factor is the type of `Vec3`. The value of the corresponding component is used to scale the speed change of the corresponding axis. The default value is `1`, which means that the scaling is `1` times, that is, no effect.
 
-> **Note**:<br>
+> **Notes**:
 > 1. Set a certain component value of the factor to `0`, you can fix a certain axis of movement or rotation.
 > 2. In the physics engines `cannon.js` and `ammo.js`, the factors act on different physical quantities, in `cannon.js` on speed and in `ammo.js` on force.

@@ -27,11 +27,11 @@ The collision matrix is used to initialize groups and masks of physical elements
 
 ### Grouping concept
 
-In the editor, the grouping format of the collision matrix is __{index, name}__, __index__ is the number of bits from __0__ to __31__, and __name__ is the name of the group. The new project project will have a default grouping: __{index: 0, name:'DEFAULT'}__.
+In the editor, the grouping format of the collision matrix is __{index, name}__, __index__ is the number of bits from __0__ to __31__, and __name__ is the name of the group. The new project will have a default grouping: __{index: 0, name: 'DEFAULT'}__.
 
 By clicking the __+__ button you can add a new group.
 
-> **Note**: Both __index__ and __name__ cannot be empty and cannot be repeated with existing items; after adding, the group cannot be deleted, only the name of the group can be modified.
+> **Note**: both __index__ and __name__ cannot be empty and cannot be repeated with existing items; after adding, the group cannot be deleted, only the name of the group can be modified.
 
 ### How to configure
 
@@ -54,6 +54,6 @@ And the grouping pairs that do not perform collision detection include:
 
 ### Configure groups of physical components
 
-In addition, the __Group__ property on the rigid body component needs to be configured into the corresponding physical element:
+In addition, the __Group__ property on the __RigidBody__ component needs to be configured into the corresponding physical element:
 
 ![rigidbody-group](./index/rigidbody-group.jpg)

@@ -6,7 +6,7 @@
 
 ```typescript
 // 加载 Prefab
-resources.load("test assets/prefab", Prefab, function (err, prefab) => {
+resources.load("test assets/prefab", Prefab, (err, prefab) => {
     const newNode = instantiate(prefab);
     this.node.addChild(newNode);
 });
@@ -40,7 +40,7 @@ resources.load("test assets/image/spriteFrame", SpriteFrame, (err, spriteFrame) 
 
 ```typescript
 // 加载 texture
-resources.load("test assets/image/texture", Texture2D ,(err: any, texture: Texture2D) => {
+resources.load("test assets/image/texture", Texture2D, (err: any, texture: Texture2D) => {
     const spriteFrame = new SpriteFrame();
     spriteFrame.texture = texture;
     this.node.getComponent(Sprite).spriteFrame = spriteFrame;
@@ -57,8 +57,33 @@ resources.load("test assets/image/texture", Texture2D ,(err: any, texture: Textu
 // 加载 SpriteAtlas（图集），并且获取其中的一个 SpriteFrame
 // 注意 atlas 资源文件（plist）通常会和一个同名的图片文件（png）放在一个目录下, 所以需要在第二个参数指定资源类型
 resources.load("test assets/sheep", SpriteAtlas, (err, atlas) => {
-    var frame = atlas.getSpriteFrame('sheep_down_0');
+    const frame = atlas.getSpriteFrame('sheep_down_0');
     sprite.spriteFrame = frame;
+});
+```
+
+### 加载 FBX 或 glTF 模型中的资源
+
+在将 FBX 模型或 glTF 模型导入编辑器后，会解析出该模型中包含的相关资源如网格，材质，骨骼，动画等，如下图所示：
+
+![](./load-assets/model.png)
+
+你可以在运行时动态加载模型中的单一资源，只需指定到某个具体子资源的路径即可，如下所示：
+
+```typescript
+// 加载模型中的网格资源
+resources.load("Monster/monster", Mesh, (err, mesh) => {
+    this.node.getComponent(MeshRenderer).mesh = mesh;
+});
+
+// 加载模型中的材质资源
+resources.load("Monster/monster-effect", Material, (err, material) => {
+    this.node.getComponent(MeshRenderer).material = material;
+});
+
+// 加载模型中的骨骼
+resources.load("Monster/Armature", Skeleton, (err, skeleton) => {
+    this.node.getComponent(SkinnedMeshRenderer).skeleton = skeleton;
 });
 ```
 
@@ -115,7 +140,7 @@ assetManager.loadRemote(remoteUrl, {ext: '.png'}, function () {
 });
 
 // 用绝对路径加载设备存储内的资源，比如相册
-var absolutePath = "/dara/data/some/path/to/image.png"
+const absolutePath = "/dara/data/some/path/to/image.png";
 assetManager.loadRemote(absolutePath, function () {
     // Use texture to create sprite frame
 });

@@ -8,7 +8,7 @@ The __Button__ component responds to a click from the user. When the user clicks
 
 Click the __Add Component__ button at the bottom of the __Inspector__ panel and select __UI/Button__ to add the __Button__ component to the node.
 
-To use `Button`, please refer to the [Button API](https://docs.cocos.com/creator/3.0/api/en/classes/ui.button.html) documentation and the [button](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/03.button) scene of the test-cases-3d project.
+To use `Button`, please refer to the [Button API](__APIDOC__/en/classes/ui.button.html) documentation and the [button](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/03.button) scene of the test-cases-3d project.
 
 ## Button Properties
 
@@ -29,7 +29,7 @@ __Button Transition__ is used to choose the action of the button when clicked by
 
 ![color-transition](button/color-transition.png)
 
-| Properties | Function Explanation |
+| Property | Function Explanation |
 | ---------- | -------------------- |
 | __Normal__     | Color of Button under Normal status.    |
 | __Pressed__    | Color of Button under Pressed status.   |

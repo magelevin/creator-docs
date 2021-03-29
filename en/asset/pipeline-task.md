@@ -14,7 +14,7 @@ The **Pipeline** (defined in `AssetManager.Pipeline`) can be understood as a ser
 
 ![pipeline](pipeline-task/pipeline.png)
 
-The advantage of a pipeline over a regular fixed process is that all the links in the pipeline are spliceable and combinable, which means you can insert new stages or remove old stages at any point in the existing pipeline, greatly increasing flexibility and scalability. 
+The advantage of a pipeline over a regular fixed process is that all the links in the pipeline are spliceable and combinable, which means you can insert new stages or remove old stages at any point in the existing pipeline, greatly increasing flexibility and scalability.
 
 ### The built-in Pipeline
 
@@ -26,7 +26,7 @@ There are three pipelines built into the Asset Manager, as shown in the figure:
 - The second pipeline is used for the normal loading process.
 - The third pipeline is used for the preload process.
 
-**Note**: The second pipeline uses a downloader and a parser, and the third pipeline uses a downloader. See document [Download and Parse](downloader-parser.md) for details.
+> **Note**: the second pipeline uses a downloader and a parser, and the third pipeline uses a downloader. See document [Download and Parse](downloader-parser.md) for details.
 
 ### Custom Pipeline
 
@@ -34,8 +34,8 @@ You can extend the built-in pipeline to achieve your own customization needs:
 
 ```typescript
 assetManager.pipeline.insert(function (task, done) {
-    task.output = task.input; 
-    for (var i = 0; i < task.input; i++) {
+    task.output = task.input;
+    for (let i = 0; i < task.input; i++) {
         console.log(task.input[i].content);
     }
     done();
@@ -45,7 +45,7 @@ assetManager.pipeline.insert(function (task, done) {
 You can also build a new pipeline:
 
 ```typescript
-var pipeline = new AssetManager.Pipeline('test', [(task, done) => {
+const pipeline = new AssetManager.Pipeline('test', [(task, done) => {
     console.log('first stage');
     done();
 }, (task, done) => {
@@ -62,7 +62,7 @@ Building the pipeline requires a series of methods, each of which requires passi
 
 ```typescript
 assetManager.pipeline.insert(function (task, done) {
-    for (var i = 0; i < task.input.length; i++) {
+    for (let i = 0; i < task.input.length; i++) {
         task.input[i].content = null;
     }
     task.output = task.input;
@@ -70,4 +70,4 @@ assetManager.pipeline.insert(function (task, done) {
 }, 1);
 ```
 
-For details, please refer to the type [AssetManager.Task](../../../api/en/classes/asset_manager.task.html).
+For details, please refer to the type [AssetManager.Task](__APIDOC__/en/classes/asset_manager.task.html).

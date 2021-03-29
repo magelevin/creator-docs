@@ -3,7 +3,7 @@
 `rect()` 方法创建矩形。
 
 | 参数 |   描述
-| -------------- | ----------- |
+| :-------------- | :----------- |
 |x | 矩形左下点的 x 坐标。
 |y | 矩形左下点的中心的 y 坐标。
 |width | 矩形的宽度。
@@ -11,16 +11,16 @@
 
 ## 实例
 
-```javascript
-var ctx = node.getComponent(Graphics);
+```ts
+const ctx = node.getComponent(Graphics);
 ctx.rect(20,20,150,100);
 ctx.stroke();
 ```
 
 <a href="rect.png"><img src="rect.png"></a>
 
-```javascript
-var ctx = node.getComponent(Graphics);
+```ts
+const ctx = node.getComponent(Graphics);
 
 // 红色矩形
 ctx.lineWidth = 6;

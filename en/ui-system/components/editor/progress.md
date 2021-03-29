@@ -6,17 +6,17 @@ __ProgressBar__ is usually used to show the progress of a certain operation in t
 
 Click the __Add Component__ button at the bottom of the __Inspector__ panel and select __UI/ProgressBar__ to add the __ProgressBar__ component to the node.
 
-To use `Progress`, please refer to the [Mask API](https://docs.cocos.com/creator/3.0/api/en/classes/ui.progressbar.html) documentation and the [progress](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/11.progress) scene of the test-cases-3d project.
+To use `Progress`, please refer to the [Mask API](__APIDOC__/en/classes/ui.progressbar.html) documentation and the [progress](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/11.progress) scene of the test-cases-3d project.
 
 ## ProgressBar Properties
 
-| Properties | Function Explanation |
-| -------------- | ----------- |
-| *BarSprite* | The __Sprite__ component needed for rendering __ProgressBar__. It can be linked by dragging a node with the __Sprite__ component to this property |
-| *Mode*      | Currently supports the __HORIZONTAL__, __VERTICAL__ and __FILLED__ modes. The initial direction can be changed by cooperating with the __reverse__ property |
-| *Progress*  | Floating point. The value range is __0~1__, and values outside the range are not allowed. |
-| *Reverse*   | Boolean value. The default fill direction is from left to right / bottom to top, when enable, it becomes right to left / top to bottom |
-| *Total Length* | The total length / total width of the __BarSprite__ when the __ProgressBar__ is at __100%__. In __FILLED__ mode, __Total Length__ represents the percentage of the total display range for __Bar Sprite__, with values ranging from __0 to 1__ |
+| Property | Function Explanation |
+| :-------------- | :----------- |
+| **BarSprite** | The __Sprite__ component needed for rendering __ProgressBar__. It can be linked by dragging a node with the __Sprite__ component to this property |
+| **Mode**      | Currently supports the __HORIZONTAL__, __VERTICAL__ and __FILLED__ modes. The initial direction can be changed by cooperating with the __reverse__ property |
+| **Progress**  | Floating point. The value range is __0~1__, and values outside the range are not allowed. |
+| **Reverse**   | Boolean value. The default fill direction is from left to right / bottom to top, when enable, it becomes right to left / top to bottom |
+| **Total Length** | The total length / total width of the __BarSprite__ when the __ProgressBar__ is at __100%__. In __FILLED__ mode, __Total Length__ represents the percentage of the total display range for __Bar Sprite__, with values ranging from __0 to 1__ |
 
 ## Detailed Explanation
 

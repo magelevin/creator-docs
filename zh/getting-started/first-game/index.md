@@ -114,12 +114,12 @@ export class PlayerController extends Component {
 }
 ```
 
-这些代码就是编写一个组件（脚本）所需的结构。具有这样结构的脚本就是 Cocos Creator 中的 **组件（Component）**，他们能够挂载到场景中的节点上，提供控制节点的各种功能，更详细的脚本信息可以查看 [脚本](../../scripting/index.md)。
+这些代码就是编写一个组件（脚本）所需的结构。具有这样结构的脚本就是 Cocos Creator 中的 **组件（Component）**，它们能够挂载到场景中的节点上，提供控制节点的各种功能，更详细的脚本信息可以查看 [脚本](../../scripting/index.md)。
 
 我们在脚本 `PlayerController` 中添加对鼠标事件的监听，让 Player 动起来：
 
 ```ts
-import { _decorator, Component, Vec3, systemEvent, SystemEvent, EventMouse, Animation, v3 } from "cc";
+import { _decorator, Component, Vec3, systemEvent, SystemEvent, EventMouse, Animation } from "cc";
 const { ccclass, property } = _decorator;
 
 @ccclass("PlayerController")
@@ -137,9 +137,9 @@ export class PlayerController extends Component {
     private _curJumpTime: number = 0;
     private _jumpTime: number = 0.1;
     private _curJumpSpeed: number = 0;
-    private _curPos: Vec3 = v3();
-    private _deltaPos: Vec3 = v3(0, 0, 0);
-    private _targetPos: Vec3 = v3();
+    private _curPos: Vec3 = new Vec3();
+    private _deltaPos: Vec3 = new Vec3(0, 0, 0);
+    private _targetPos: Vec3 = new Vec3();
     private _isMoving = false;
 
     start () {
@@ -166,7 +166,7 @@ export class PlayerController extends Component {
         this._curJumpTime = 0;
         this._curJumpSpeed = this._jumpStep / this._jumpTime;
         this.node.getPosition(this._curPos);
-        Vec3.add(this._targetPos, this._curPos, v3(this._jumpStep, 0, 0));
+        Vec3.add(this._targetPos, this._curPos, new Vec3(this._jumpStep, 0, 0));
 
         this._isMoving = true;
     }
@@ -183,8 +183,7 @@ export class PlayerController extends Component {
                 this.node.setPosition(this._targetPos);
                 this._startJump = false;
                 this.onOnceJumpEnd();
-            }
-            else {
+            } else {
                 // tween
                 this.node.getPosition(this._curPos);
                 this._deltaPos.x = this._curJumpSpeed * deltaTime;
@@ -242,7 +241,7 @@ export class PlayerController extends Component {
 
     ```ts
     @property({type: Animation})
-    public BodyAnim: Animation = null;
+    public BodyAnim: Animation|null = null;
     ```
 
     然后在 **属性检查器** 中将 Body 身上的 `Animation` 拖到这个变量上。
@@ -252,11 +251,12 @@ export class PlayerController extends Component {
     在跳跃的函数 `jumpByStep` 中加入动画播放的代码：
 
     ```ts
-    if (step === 1) {
-        this.BodyAnim.play('oneStep');
-    }
-    else if (step === 2) {
-        this.BodyAnim.play('twoStep');
+    if (this.BodyAnim) {
+        if (step === 1) {
+            this.BodyAnim.play('oneStep');
+        } else if (step === 2) {
+            this.BodyAnim.play('twoStep');
+        }
     }
     ```
 
@@ -299,7 +299,7 @@ enum BlockType {
 export class GameManager extends Component {
 
     @property({type: Prefab})
-    public cubePrfb: Prefab = null;
+    public cubePrfb: Prefab|null = null;
     @property({type: CCInteger})
     public roadLength: Number = 50;
     private _road: number[] = [];
@@ -317,8 +317,7 @@ export class GameManager extends Component {
         for (let i = 1; i < this.roadLength; i++) {
             if (this._road[i-1] === BlockType.BT_NONE) {
                 this._road.push(BlockType.BT_STONE);
-            }
-            else {
+            } else {
                 this._road.push(Math.floor(Math.random() * 2));
             }
         }
@@ -333,7 +332,11 @@ export class GameManager extends Component {
     }
 
     spawnBlockByType(type: BlockType) {
-        let block = null;
+        if (!this.cubePrfb) {
+            return null;
+        }
+
+        let block: Node|null = null;
         switch(type) {
             case BlockType.BT_STONE:
                 block = instantiate(this.cubePrfb);
@@ -436,8 +439,7 @@ start () {
 setInputActive(active: boolean) {
     if (active) {
         systemEvent.on(SystemEvent.EventType.MOUSE_UP, this.onMouseUp, this);
-    } 
-    else {
+    } else {
         systemEvent.off(SystemEvent.EventType.MOUSE_UP, this.onMouseUp, this);
     }
 }
@@ -473,10 +475,15 @@ start () {
 }
 
 init() {
-    this.startMenu.active = true;
+    if (this.startMenu) {
+        this.startMenu.active = true;
+    }
+
     this.generateRoad();
-    this.playerCtrl.setInputActive(false);
-    this.playerCtrl.node.setPosition(v3());
+    if (this.playerCtrl) {
+        this.playerCtrl.setInputActive(false);
+        this.playerCtrl.node.setPosition(Vec3.ZERO);
+    }
 }
 
 set curState (value: GameState) {
@@ -485,9 +492,13 @@ set curState (value: GameState) {
             this.init();
             break;
         case GameState.GS_PLAYING:
-            this.startMenu.active = false;
+            if (this.startMenu) {
+                this.startMenu.active = false;
+            }
             setTimeout(() => {      // 直接设置 active 会直接开始监听鼠标事件，这里做了延迟处理
-                this.playerCtrl.setInputActive(true);
+                if (this.playerCtrl) {
+                    this.playerCtrl.setInputActive(true);
+                }
             }, 0.1);
             break;
         case GameState.GS_END:
@@ -546,8 +557,7 @@ onStartButtonClicked() {
             if (this._road[moveIndex] == BlockType.BT_NONE) {   // 跳到了空方块上
                 this.curState = GameState.GS_INIT;
             }
-        }
-        else {    // 跳过了最大长度
+        } else {    // 跳过了最大长度
             this.curState = GameState.GS_INIT;
         }
     }
@@ -558,7 +568,7 @@ onStartButtonClicked() {
     ```ts
     start () {
         this.curState = GameState.GS_INIT;
-        this.playerCtrl.node.on('JumpEnd', this.onPlayerJumpEnd, this);
+        this.playerCtrl?.node.on('JumpEnd', this.onPlayerJumpEnd, this);
     }
 
     // ...
@@ -596,7 +606,7 @@ onStartButtonClicked() {
 
     ```ts
     @property({type: Label})
-    public stepsLabel: Label = null;
+    public stepsLabel: Label|null = null;
     ```
 
     保存脚本后回到编辑器，将 Steps 节点拖拽到 GameManager 在属性检查器中的 stepsLabel 属性框中：
@@ -613,10 +623,17 @@ onStartButtonClicked() {
                 this.init();
                 break;
             case GameState.GS_PLAYING:
-                this.startMenu.active = false;
-                this.stepsLabel.string = '0';   // 将步数重置为 0
+                if (this.startMenu) {
+                    this.startMenu.active = false;
+                }
+
+                if (this.stepsLabel) {
+                    this.stepsLabel.string = '0';   // 将步数重置为0
+                }
                 setTimeout(() => {      // 直接设置 active 会直接开始监听鼠标事件，这里做了延迟处理
-                    this.playerCtrl.setInputActive(true);
+                    if (this.playerCtrl) {
+                        this.playerCtrl.setInputActive(true);
+                    }
                 }, 0.1);
                 break;
             case GameState.GS_END:
@@ -681,7 +698,7 @@ onStartButtonClicked() {
 
 ![remove capsule](./images/remove-capsule.png)
 
-此时会发现模型有些暗，可以在 Cocos 节点下加个聚光灯（Spot Light），以突出它锃光瓦亮的脑门。
+此时会发现模型有些暗，可以在 Cocos 节点下加个聚光灯（Spotlight），以突出它锃光瓦亮的脑门。
 
 ![add cocos light](./images/cocos-add-light.png)
 
@@ -710,16 +727,21 @@ jumpByStep(step: number) {
     this._curJumpTime = 0;
     this._curJumpSpeed = this._jumpStep / this._jumpTime;
     this.node.getPosition(this._curPos);
-    Vec3.add(this._targetPos, this._curPos, v3(this._jumpStep, 0, 0));
+    Vec3.add(this._targetPos, this._curPos, new Vec3(this._jumpStep, 0, 0));
 
     this._isMoving = true;
 
-    this.CocosAnim.getState('cocos_anim_jump').speed = 3.5; // 跳跃动画时间比较长，这里加速播放
-    this.CocosAnim.play('cocos_anim_jump'); // 播放跳跃动画
-    if (step === 1) {
-        // this.BodyAnim.play('oneStep');
-    } else if (step === 2) {
-        this.BodyAnim.play('twoStep');
+    if (this.CocosAnim) {
+        this.CocosAnim.getState('cocos_anim_jump').speed = 3.5; // 跳跃动画时间比较长，这里加速播放
+        this.CocosAnim.play('cocos_anim_jump'); // 播放跳跃动画
+    }
+
+    if (this.BodyAnim) {
+        if (step === 1) {
+            //this.BodyAnim.play('oneStep');
+        } else if (step === 2) {
+            this.BodyAnim.play('twoStep');
+        }
     }
 
     this._curMoveIndex += step;
@@ -731,7 +753,9 @@ jumpByStep(step: number) {
 ```ts
 onOnceJumpEnd() {
     this._isMoving = false;
-    this.CocosAnim.play('cocos_anim_idle');
+    if (this.CocosAnim) {
+        this.CocosAnim.play('cocos_anim_idle');
+    }
     this.node.emit('JumpEnd', this._curMoveIndex);
 }
 ```
@@ -745,16 +769,16 @@ onOnceJumpEnd() {
 **PlayerController.ts**
 
 ```ts
-import { _decorator, Component, Vec3, systemEvent, SystemEvent, EventMouse, Animation, SkeletalAnimation, v3 } from "cc";
+import { _decorator, Component, Vec3, systemEvent, SystemEvent, EventMouse, Animation, SkeletalAnimation } from "cc";
 const { ccclass, property } = _decorator;
 
 @ccclass("PlayerController")
 export class PlayerController extends Component {
 
     @property({type: Animation})
-    public BodyAnim: Animation = null;
+    public BodyAnim: Animation|null = null;
     @property({type: SkeletalAnimation})
-    public CocosAnim: SkeletalAnimation = null;
+    public CocosAnim: SkeletalAnimation|null = null;
 
     // for fake tween
     private _startJump: boolean = false;
@@ -762,9 +786,9 @@ export class PlayerController extends Component {
     private _curJumpTime: number = 0;
     private _jumpTime: number = 0.3;
     private _curJumpSpeed: number = 0;
-    private _curPos: Vec3 = v3();
-    private _deltaPos: Vec3 = v3(0, 0, 0);
-    private _targetPos: Vec3 = v3();
+    private _curPos: Vec3 = new Vec3();
+    private _deltaPos: Vec3 = new Vec3(0, 0, 0);
+    private _targetPos: Vec3 = new Vec3();
     private _isMoving = false;
     private _curMoveIndex = 0;
 
@@ -778,8 +802,7 @@ export class PlayerController extends Component {
     setInputActive(active: boolean) {
         if (active) {
             systemEvent.on(SystemEvent.EventType.MOUSE_UP, this.onMouseUp, this);
-        }
-        else {
+        } else {
             systemEvent.off(SystemEvent.EventType.MOUSE_UP, this.onMouseUp, this);
         }
     }
@@ -787,8 +810,7 @@ export class PlayerController extends Component {
     onMouseUp(event: EventMouse) {
         if (event.getButton() === 0) {
             this.jumpByStep(1);
-        }
-        else if (event.getButton() === 2) {
+        } else if (event.getButton() === 2) {
             this.jumpByStep(2);
         }
 
@@ -803,16 +825,21 @@ export class PlayerController extends Component {
         this._curJumpTime = 0;
         this._curJumpSpeed = this._jumpStep / this._jumpTime;
         this.node.getPosition(this._curPos);
-        Vec3.add(this._targetPos, this._curPos, v3(this._jumpStep, 0, 0));
+        Vec3.add(this._targetPos, this._curPos, new Vec3(this._jumpStep, 0, 0));
 
         this._isMoving = true;
 
-        this.CocosAnim.getState('cocos_anim_jump').speed = 3.5; // 跳跃动画时间比较长，这里加速播放
-        this.CocosAnim.play('cocos_anim_jump'); // 播放跳跃动画
-        if (step === 1) {
-            // this.BodyAnim.play('oneStep');
-        } else if (step === 2) {
-            this.BodyAnim.play('twoStep');
+        if (this.CocosAnim) {
+            this.CocosAnim.getState('cocos_anim_jump').speed = 3.5; //跳跃动画时间比较长，这里加速播放
+            this.CocosAnim.play('cocos_anim_jump'); //播放跳跃动画
+        }
+
+        if (this.BodyAnim) {
+            if (step === 1) {
+                //this.BodyAnim.play('oneStep');
+            } else if (step === 2) {
+                this.BodyAnim.play('twoStep');
+            }
         }
 
         this._curMoveIndex += step;
@@ -820,7 +847,10 @@ export class PlayerController extends Component {
 
     onOnceJumpEnd() {
         this._isMoving = false;
-        this.CocosAnim.play('cocos_anim_idle');
+        if (this.CocosAnim) {
+            this.CocosAnim.play('cocos_anim_idle');
+        }
+
         this.node.emit('JumpEnd', this._curMoveIndex);
     }
 
@@ -847,7 +877,7 @@ export class PlayerController extends Component {
 **GameManager.ts**
 
 ```ts
-import { _decorator, Component, Prefab, instantiate, Node, Label, CCInteger, v3} from "cc";
+import { _decorator, Component, Prefab, instantiate, Node, Label, CCInteger, Vec3 } from "cc";
 import { PlayerController } from "./PlayerController";
 const { ccclass, property } = _decorator;
 
@@ -887,7 +917,7 @@ export class GameManager extends Component {
         this.startMenu.active = true;
         this.generateRoad();
         this.playerCtrl.setInputActive(false);
-        this.playerCtrl.node.setPosition(v3());
+        this.playerCtrl.node.setPosition(Vec3.ZERO);
         this.playerCtrl.reset();
     }
 
@@ -920,8 +950,7 @@ export class GameManager extends Component {
         for (let i = 1; i < this.roadLength; i++) {
             if (this._road[i-1] === BlockType.BT_NONE) {
                 this._road.push(BlockType.BT_STONE);
-            }
-            else {
+            } else {
                 this._road.push(Math.floor(Math.random() * 2));
             }
         }
@@ -955,8 +984,7 @@ export class GameManager extends Component {
             if (this._road[moveIndex] == BlockType.BT_NONE) {   // 跳到了空方块上
                 this.curState = GameState.GS_INIT;
             }
-        }
-        else {    // 跳过了最大长度
+        } else {    // 跳过了最大长度
             this.curState = GameState.GS_INIT;
         }
     }

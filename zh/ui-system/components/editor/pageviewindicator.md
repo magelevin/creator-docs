@@ -6,14 +6,14 @@ PageviewIndicator 用于显示 PageView 当前的页面数量和标记当前所�
 
 点击 **属性检查器** 下面的 **添加组件** 按钮，然后选择 **UI/PageViewIndicator** 即可添加 PageViewIndicator 组件到节点上。
 
-PageViewIndicator 的脚本接口请参考 [PageViewIndicator API](https://docs.cocos.com/creator/3.0/api/zh/classes/ui.pageviewindicator.html)。
+PageViewIndicator 的脚本接口请参考 [PageViewIndicator API](__APIDOC__/zh/classes/ui.pageviewindicator.html)。
 
 关于使用可以参考 test-cases-3d 里的 [pageViewIndicator](https://github.com/cocos-creator/test-cases-3d/tree/master/assets/cases/ui/15.pageview) 相关。
 
 ## PageviewIndicator 属性
 
 | 属性 |   功能说明 |
-| -------------- | ----------- |
+| :-------------- | :----------- |
 | spriteFrame | 每个页面标记显示的图片 |
 | direction | 页面标记摆放方向，分别为 水平方向 和 垂直方向 |
 | cellSize | 每个页面标记的大小 |

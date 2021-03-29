@@ -9,13 +9,13 @@ When the angle of the corners is smaller, the length of the miter is greater. To
 If the miter length exceeds the value of `miterLimit`, the corners are displayed with the `bevel` type of `lineJoin`.
 
 | Parameter | Description |
-| -------------- | ----------- |
-| *number* | Positive number. Specifies the maximum miter length. If the miter length exceeds the value of `miterLimit`, the corners are displayed with the `bevel` type of `lineJoin`. |
+| :-------------- | :----------- |
+| **number** | Positive number. Specifies the maximum miter length. If the miter length exceeds the value of `miterLimit`, the corners are displayed with the `bevel` type of `lineJoin`. |
 
 ## Example
 
-```javascript
-var ctx = node.getComponent(Graphics);
+```ts
+const ctx = node.getComponent(Graphics);
 ctx.miterLimit = 10;
 ctx.moveTo(20,20);
 ctx.lineTo(100,50);

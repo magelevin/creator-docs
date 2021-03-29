@@ -60,10 +60,22 @@ function getPageTitle (path) {
     var match = PAGE_TITLE_RE.exec(content);
     if (match) {
         return match[1];
-    }
-    else {
+    } else {
         return Path.parse(path).name;
     }
+}
+
+function changeAPIUrl () {
+    var bookJson = JSON.parse(Fs.readFileSync('./zh/book.json', 'utf-8'));
+    var version = bookJson.variables.version[0].name;
+    var APIDocPrefix = `https://docs.cocos.com/creator/${version}/api`;
+    var allPagesPattern = ['zh/*/**/*.md', 'en/*/**/*.md'];
+    var allPages = Globby.sync(allPagesPattern, { absolute: true });
+    allPages.forEach(element => {
+        var content = Fs.readFileSync(element, 'utf8');
+        content = content.replace(/__APIDOC__/g, APIDocPrefix);
+        Fs.writeFileSync(element, content, 'utf8');
+    });
 }
 
 function fillSummary (path) {
@@ -82,6 +94,7 @@ function fillSummary (path) {
 
 // add unlisted pages into SUMMARY.md to allow gitbook to build them
 gulp.task('prebuild', ['restore-summary'], function () {
+    changeAPIUrl();
     fillSummary('zh/SUMMARY.md');
     fillSummary('en/SUMMARY.md');
 });
@@ -92,13 +105,12 @@ gulp.task('preview', ['restore-summary', 'restore-ignore'], function (done) {
         quickPreview(includeFiles, (error) => {
             if (error) {
                 return done(error);
-            }
-            else {
+            } else {
                 openServer(done);
             }
         });
-    }
-    else {
+    } else {
+        changeAPIUrl();
         fillSummary('zh/SUMMARY.md');
         fillSummary('en/SUMMARY.md');
         openServer(done);
