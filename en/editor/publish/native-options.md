@@ -24,7 +24,7 @@ When you select the native platform you want to build in the **Platform** option
 
 #### Template
 
-Currently, the engine template available in **Template** is **Link**.
+Starting with Cocos Creator 3.0, the engine template available in **Template** is **Link** for a consistent experience, removing the original **Default** template.
 
 The **Link** template does not copy the **Cocos2d-x** source-code to the `build` directory. Instead, the shared **Cocos2d-x** source-code is used. This can effectively reduce the footprint of the `build` directory, and modifications to the **Cocos2d-x** source-code can also be shared.
 
@@ -34,7 +34,7 @@ The **Link** template does not copy the **Cocos2d-x** source-code to the `build`
 > - The first time the source code engine builds and compiles a project, it takes a long time to compile C++ code, depending on the configuration of the computer, which may take 5~20 minutes. After the same project has been compiled once, the time required for the next recompile is greatly shortened.
 > - The projects built by the source code engine, compiled and run using native development environment (such as Android Studio, Xcode, etc. IDE), and also can be debugged and error trapped.
 
-Currently, the Cocos Creator installation directory already includes Cocos2d-x source code engine in the `resources\3d\cocos2d-x-lite` folder.
+Currently, the Cocos Creator installation directory already includes Cocos2d-x source code engine in the `resources\3d\cocos2d-x-lite` folder. To customize the engine, please refer to the [Engine Customization Workflow](../../advanced-topics/engine-customization.md) documentation for details.
 
 #### Polyfills
 
@@ -151,7 +151,7 @@ After the build options are set, you can begin the build. Click the **Build** bu
 
 When compiling scripts and zipping resources, a blue progress bar will display on the **Build Task** window. When the build completes, the progress bar reaches 100% and turns green.
 
-![build progress](publish-native/build-progress-android.png)
+![build progress](publish-native/build-progress-windows.png)
 
 After the build, we get a standard Cocos2d-x project, with the same structure as a new project created using Cocos Console. Taking the Windows platform as an example, the directory structure of the exported native project package `windows` is shown below:
 
@@ -185,7 +185,7 @@ Once the **Make** process is complete, continue to click the **Run** button next
 
 ### By the IDE
 
-Click the folder icon button in the bottom left corner of the **build task** window, the release path will be opened in the file manager of the operating system. The `build-win32-link` or `build-win32-default` (depending on the selected platform and template) under the `build` directory in this path contains the native platform project of the current build. Except for the Android platform, the Android platform project is generated in the `proj` directory of the release path.
+Click the folder icon button in the bottom left corner of the **build task** window, the release path will be opened in the file manager of the operating system. The `proj` folder under the release package directory contains the native platform project of the current build.
 
 Next, open these generated native projects using the IDE corresponding to the native platform (e.g. Xcode, Android Studio, Visual Studio) and you can make further operations like compilation, preview and release.
 
@@ -209,7 +209,7 @@ To learn how to debug on a native platform, please refer to [Debugging JavaScrip
 
 1. Projects that run debug mode builds on MIUI 10 systems may pop up a "Detected problems with API compatibility" prompt box, which is a problem introduced by the MIUI 10 system itself, you can use release mode build to solve the problem.
 
-2. When building for iOS, if you don't use WebView related features in your project, please ensure that the WebView module is removed from the **Project -> Project Settings -> Feature crop** to help your game approval go as smoothly as possible on iOS App Store. If you really needs to use WebView (or the added third-party SDK comes with WebView), and therefore the game rejected by App Store, you can still try to appeal through email.
+2. When building for iOS, if WebView and related features are not needed, please ensure that the WebView module is removed from the **Project -> Project Settings -> Feature Cropping** to help the approval process go as smoothly as possible on iOS App Store. If WebView is needed (or the added third-party SDK comes with WebView), and therefore the game rejected by App Store, try to appeal through email.
 
 3. The result of compiling the Android through the editor and Android Studio has the following differences.
 

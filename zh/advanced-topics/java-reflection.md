@@ -1,7 +1,5 @@
 # 如何在 Android 平台上使用 JavaScript 直接调用 Java 方法
 
-> 本文档基于 v2.x 编写，在 Cocos Creator 3.0 上可能略有变动，我们会尽快更新。
-
 使用 Creator 打包的安卓原生应用中，我们可以通过反射机制直接在 JavaScript 中调用 Java 的静态方法。它的使用方法很简单：
 
 ```js
@@ -12,10 +10,10 @@ var o = jsb.reflection.callStaticMethod(className, methodName, methodSignature, 
 
 ## 类名
 
-参数中的类名必须是包含 Java 包路径的完整类名，例如我们在 `org.cocos2dx.javascript` 这个包下面写了一个 `Test` 类：
+参数中的类名必须是包含 Java 包路径的完整类名，例如我们在 `com.cocos.game` 这个包下面写了一个 `Test` 类：
 
 ```java
-// package org.cocos2dx.javascript;
+// package "com.cocos.game";
 
 public class Test {
     
@@ -34,7 +32,7 @@ public class Test {
 }
 ```
 
-那么这个 Test 类的完整类名应该是 `org/cocos2dx/javascript/Test`，注意这里必须是斜线 `/`，而不是在 Java 代码中我们习惯的点 `.`。
+那么这个 Test 类的完整类名应该是 `com/cocos/game/Test`，注意这里必须是斜线 `/`，而不是在 Java 代码中我们习惯的点 `.`。
 
 ## 方法名
 
@@ -69,14 +67,14 @@ public class Test {
 
 ```js
 // 调用 hello 方法
-jsb.reflection.callStaticMethod("org/cocos2dx/javascript/Test", "hello", "(Ljava/lang/String;)V", "this is a message from JavaScript");
+jsb.reflection.callStaticMethod("com/cocos/game/Test", "hello", "(Ljava/lang/String;)V", "this is a message from JavaScript");
 
 // 调用第一个 sum 方法
-var result = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/Test", "sum", "(II)I", 3, 7);
+var result = jsb.reflection.callStaticMethod("com/cocos/game/Test", "sum", "(II)I", 3, 7);
 cc.log(result); //10
 
 // 调用第二个 sum 方法
-var result = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/Test", "sum", "(I)I", 3);
+var result = jsb.reflection.callStaticMethod("com/cocos/game/Test", "sum", "(I)I", 3);
 cc.log(result); //5
 ```
 
@@ -90,7 +88,7 @@ z这样在 **控制台** 中就会有正确的输出。
 
 ```c++
 // 给我们熟悉的 AppActivity 类稍微加点东西
-public class AppActivity extends Cocos2dxActivity {
+public class AppActivity extends CocosActivity {
     
     private static AppActivity app = null;
     @Override
@@ -119,7 +117,7 @@ public class AppActivity extends Cocos2dxActivity {
 然后在 JavaScript 中调用：
 
 ```js
-jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "showAlertDialog", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
+jsb.reflection.callStaticMethod("com/cocos/game/AppActivity", "showAlertDialog", "(Ljava/lang/String;Ljava/lang/String;)V", "title", "hahahahha");
 ```
 
 这样调用之后你就可以看到一个 Android 原生的 Alert 对话框了。
@@ -136,7 +134,7 @@ jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "showAler
 alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
     public void onClick(DialogInterface dialog, int which) {
         // 一定要在 GL 线程中执行
-        app.runOnGLThread(new Runnable() {
+        CocosHelper.runOnGameThread(new Runnable() {
             @Override
             public void run() {
                 CocosJavascriptJavaBridge.evalString("cc.log(\"Javascript Java bridge!\")");

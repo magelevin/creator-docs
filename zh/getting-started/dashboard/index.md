@@ -23,9 +23,12 @@ Cocos Dashboard 界面主要包括以下几种选项卡：
 
 ![Dashboard](index/project-window.png)
 
-- **1** — 包括 **使用其他编辑器打开项目**、**打开项目所在文件夹** 和 **从列表中移除项目** 三种功能。
+- **1** — 包括 **使用其他编辑器打开项目**、**打开项目所在文件夹**、**从列表中移除**、**选择项目的图标** 和 **重命名项目** 五种功能（其中后面两种功能为 Dashboard 1.0.12 版本新增）。
+    - **选择项目的图标**：项目图标目前支持 bmp、png、gif、jpg 四种格式。
 - **2** — 可选择其他编辑器打开项目。
-- **导入** 按钮 — 用于导入其他项目。
+- **3** — 可根据时间正序/反序排列项目（1.0.12 版本新增）。
+- **4** — 可通过项目名称直接搜索项目（1.0.12 版本新增）。
+- **导入** 按钮 — 用于导入其他项目。从 **v1.0.13** 开始，支持直接将项目从操作系统的文件管理器拖拽到列表中。
 - **新建** 按钮 — 用于新建项目，点击该按钮后会进入 **新建项目** 页面，详情可参考下方介绍。
 
 ### 新建项目
@@ -50,7 +53,7 @@ Creator 提供了一些项目模板，包括了各种不同类型的游戏基本
 
 需要注意的是，第一次运行 Cocos Dashboard 时，这个列表是空的，可以点击右下角的两个按钮导入本地已有的 Creator 编辑器或者直接下载安装。
 
-- **添加本地版本**：用于添加本地已有的 Creator 编辑器到 **编辑器** 版本列表。
+- **添加本地版本**：用于添加本地已有的 Creator 编辑器到 **编辑器** 版本列表。从 **v1.0.13** 开始，支持直接将本地已有的 Creator 编辑器从操作系统的文件管理器拖拽到 **编辑器** 版本列表中。
 - **下载编辑器**：点击该按钮会跳转到编辑器下载页面，该页面会列出所有已安装和未安装的编辑器版本，可选择所需的编辑器版本进行下载。
 
   ![Download](index/dashboard-download.png)
@@ -67,4 +70,4 @@ Creator 提供了一些项目模板，包括了各种不同类型的游戏基本
 
 ![learn](index/learn.png)
 
-开发者也可以通过点击左下角各网站的图标访问 Cocos 官方获取更多教程等信息，目前包括微信公众号、[微博](https://weibo.com/cocos2dx)、[twitter](https://twitter.com/cocos2dx)、[哔哩哔哩](https://space.bilibili.com/491120849)、[youtube](https://www.youtube.com/channel/UCAsPLdpiAQbFuYqiZvi0P5A) 和 [GitHub](https://github.com/cocos-creator/engine)。
+开发者也可以通过点击左下角各网站的图标访问 Cocos 官方获取更多教程等信息，目前包括微信公众号、[微博](https://weibo.com/cocos2dx)、[Twitter](https://twitter.com/cocos2dx)、[哔哩哔哩](https://space.bilibili.com/491120849)、[YouTube](https://www.youtube.com/channel/UCAsPLdpiAQbFuYqiZvi0P5A) 和 [GitHub](https://github.com/cocos-creator/engine)。

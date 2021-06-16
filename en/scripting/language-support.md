@@ -16,7 +16,7 @@ Cocos Creator supports TypeScript 4.1.0. The following restrictions are based on
         "experimentalDecorators": true,
         "moduleResolution": /* Cocos Creator's specific module resolution algorithm */,
         "forceConsistentCasingInFileNames": true,
-    }，
+    },
   }
   ```
 
@@ -27,7 +27,7 @@ Cocos Creator supports TypeScript 4.1.0. The following restrictions are based on
 
 - `export =` and `import =` are not supported.
 
--  Variables derived from namespace must be declared as `const`, not `var` or `let`.
+- Variables derived from namespace must be declared as `const`, not `var` or `let`.
 
 - Different declarations in the same namespace do not share scope and require explicit use of qualifiers.
 
@@ -36,6 +36,18 @@ Cocos Creator supports TypeScript 4.1.0. The following restrictions are based on
 `tsconfig.json` is not read at compile time, meaning that the compile option for `tsconfig.json` does not affect compilation.
 
 Developers can still use `tsconfig.json` in their projects to work with the IDE to implement features such as type checking. In order to make the IDE's TypeScript checking compatible with the Creator's behavior, developers need to pay some extra attention to [tsconfig](./tsconfig.md).
+
+### TypeScript Reference Tutorial
+
+- [Tutorial: v3.0 TypeScript question answering and experience sharing](https://discuss.cocos2d-x.org/t/tutorial-3-0-typescript-question-answering-and-experience-sharing/52932)
+- [TypeScript Official Website](https://www.typescriptlang.org/)
+- [TypeScript - Classes](https://www.typescriptlang.org/docs/handbook/classes.html)
+- [TypeScript - Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html)
+- [TypeScript - DefinitelyTyped](http://definitelytyped.org/)
+- [Learn TypeScript in Y minutes [cn]](https://learnxinyminutes.com/docs/zh-cn/typescript-cn/)
+- [TypeScript GitHub](https://github.com/Microsoft/TypeScript)
+- [The Best Resources For Learning TypeScript for Game Development](https://www.cocos.com/en/the-best-resources-for-learning-typescript-for-game-development)
+- [3 Excuses Developers Give To Avoid TypeScript — and the Better Reasons They Should Use It](https://betterprogramming.pub/the-bad-reasons-people-avoid-typescript-and-the-better-reasons-why-they-shouldnt-86f8d98534de)
 
 ## JavaScript
 
@@ -68,7 +80,7 @@ Creator opens some compilation options that will be applied to the entire projec
 | Option | Name | Meaning |
 | :-- | :--- | :-- |
 | **useDefineForClassFields** | Conforming class fields | When enabled, class fields will be implemented using the `Define` semantics, otherwise they will be implemented using the `Set` semantics. Only works if the target does not support ES6 class fields.    |
-| **allowDeclareFields** |Allows declaring class fields| When enabled, the `declare` keyword will be allowed in TypeScript scripts to declare class fields and, when the field is not declared with `declare` and no explicit initialization is specified, it will be initialized according to the specification to ` undefined`. |The
+| **allowDeclareFields** |Allows declaring class fields| When enabled, the `declare` keyword will be allowed in TypeScript scripts to declare class fields and, when the field is not declared with `declare` and no explicit initialization is specified, it will be initialized according to the specification to `undefined`. |The
 
 ### Runtime Environment
 
@@ -101,7 +113,7 @@ import blah from './blah-blah';
 export default blah;
 ```
 
-## Related Tutorials
+### JavaScript Related Tutorials
 
 - [JavaScript Standard Reference Tutorial [cn]](https://wangdoc.com/javascript/)
 - [JavaScript Garden](https://bonsaiden.github.io/JavaScript-Garden/)
